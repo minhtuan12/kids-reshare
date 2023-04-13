@@ -1,0 +1,7 @@
+Http\Controllers
+Models
+database\migrations
+public
+resources\view  
+    layouts
+routes
