@@ -10,7 +10,7 @@
     <title> @yield('title') </title>
 
     @yield('styles')
-    @yield('js')
+    @yield('scripts')
 
 </head>
 
@@ -26,8 +26,9 @@
                     <li><a class="active" href="{{ route('index') }}">Home</a></li>
                     <li><a href="{{ route('products') }}">Products</a></li>
                     <li><a href="{{ route('upload') }}">Donate</a></li>
-                    <li><a href="#">Account</a></li>
                     @auth
+                        @php($id = Auth::user()->id)
+                        <li><a href="{{ route('account.create', ['id' => $id]) }}">Account</a></li>
                         <li><a href="{{ route('logout') }}">Log out</a></li>
                     @else
                         <li><a href="{{ route('login_register') }}">Register/Login</a></li>
@@ -35,16 +36,23 @@
                 </ul>
             </nav>
         </div>
+        @if (Route::is('index'))
+            <main>
+                @yield('content')
+            </main>
+    </div>
 
-        <!-- Page Content -->
-        <main>
-            @yield('content')
-        </main>
+    <!-- Page Content -->
+@else
+    <main>
+        @yield('content')
+    </main>
+    @endif
 
-        <!-------- footer -------->
-        <footer>
-            @yield('footer')
-        </footer>
+    <!-------- footer -------->
+    <footer>
+        @yield('footer')
+    </footer>
 
 </body>
 

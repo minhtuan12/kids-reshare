@@ -17,10 +17,10 @@ class UploadController extends Controller
 
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'prod_name' => ['required'],
-        //     'buy_date' => ['required']
-        // ]);
+        $request->validate([
+            'prod_name' => ['required'],
+            'buy_date' => ['required', 'after:01/01/2000'],
+        ]);
 
         if ($request->hasFile('file')) {
 
@@ -42,7 +42,7 @@ class UploadController extends Controller
                 "img" => $request->file->hashName()
             ]);
 
-            $product->save(); // Finally, save the record.
+            $product->save(); 
         } else {
             $product = new Products([
                 "prod_name" => $request->input('prod_name'),

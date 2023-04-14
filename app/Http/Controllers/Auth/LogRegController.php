@@ -54,7 +54,7 @@ class LogRegController extends Controller
         ]);
         
         if ($request->input('cfPassword') != $request->input('password')) 
-            return redirect()->route('login_register')->with('wrong', 'PLEASE CONFIRM PASSWORD!');
+            return redirect()->route('login_register.register')->with('wrong', 'PLEASE CONFIRM PASSWORD!');
         
         $user->save();
         return redirect()->route('login_register');

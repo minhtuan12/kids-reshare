@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware('guest')->group(function () {
     //     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -71,6 +72,18 @@ Route::middleware('auth')->group(function () {
     Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'store'])
         ->name('upload');
 
-    Route::post('/logout', [\App\Http\Controllers\Auth\LogController::class, 'logout'])
+    Route::get('/logout', [\App\Http\Controllers\Auth\LogController::class, 'logout'])
         ->name('logout');
+
+    Route::get('/account/{id}', [\App\Http\Controllers\Auth\AccountController::class, 'userInfo'])
+        ->name('account.create');
+
+    Route::get('/account/{id}/update', [\App\Http\Controllers\Auth\AccountController::class, 'create'])
+        ->name('account.createUpdate');
+
+    Route::patch('/account/{id}/update', [\App\Http\Controllers\Auth\AccountController::class, 'update'])
+        ->name('account.update');
+
+    Route::post('/account/{id}', [\App\Http\Controllers\Auth\AccountController::class, 'kidInfo'])
+        ->name('account.store');
 });

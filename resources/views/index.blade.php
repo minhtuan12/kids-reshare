@@ -61,8 +61,7 @@
             </div>
 
         </div>
-    </div>
-    </div>
+    </div>  
 
     <!-------New Product ----->
 
@@ -120,8 +119,8 @@
                     <h3>Download our App</h3>
                     <p>Download App for Android and ios mobile phone.</p>
                     <div class="app-logo">
-                        <img src="{{ asset('images/play-store.jpg') }}">
-                        <img src="{{ asset('images/app-store') }}">
+                        <img src="{{ asset('images/play-store.png') }}">
+                        <img src="{{ asset('images/app-store.png') }}">
                     </div>
                 </div>
                 <div class="footer-col-2">
@@ -140,40 +139,14 @@
         </div>
     </div>
 @endsection
-<!-------- footer -------->
-{{-- <div class="footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="footer-col-1">
-                            <h3>Download our App</h3>
-                            <p>Download App for Android and ios mobile phone.</p>
-                            <div class="app-logo">
-                                <img src="{{ asset('images/play-store.jpg') }}">
-                                <img src="{{ asset('images/app-store') }}">
-                            </div>
-                        </div>
-                        <div class="footer-col-2">
-                            <img src="{{ asset('images/logo.jpg') }}">
-                            <p>Our Aims is to satisfy all our customers and put a smile on their face.</p>
-                        </div>
-                        <div class="footer-col-4">
-                            <h3>Follow us</h3>
-                            <ul>
-                                <li>Facebook</li>
-                                <li>Twitter</li>
-                                <li>Instagram</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script>
+
+{{-- <script>
                 var msg = '{{ Session::get('success') }}';
                 var exist = '{{ Session::has('success') }}';
                 if (exist) {
                     alert(msg);
                 }
-            </script> --}}
+            </script>  --}}
 {{-- </body> --}}
 
 {{-- </html> --}}

@@ -17,4 +17,8 @@ class user extends Model implements Authenticatable
         'phone',
         'password',
     ];
+
+    public function kidInfo() {
+        return $this->hasMany(KidProfile::class);
+    }
 }
