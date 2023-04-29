@@ -6,54 +6,75 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Image;
 use App\Models\Products;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class UploadController extends Controller
 {
     public function create()
     {
-        return view('upload');
+        $cate_products = new CategoryController();
+        $cate_products = $cate_products->show();
+        return view('upload')->with('cate_products', $cate_products);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'prod_name' => ['required'],
-            'buy_date' => ['required', 'after:01/01/2000'],
-        ]);
+        // $request->validate([
+        //     'prod_name' => ['required'],
+        //     'buy_date' => ['required' | 'after:01/01/2000'],
+        //     'img' => ['required' | 'mimes:jpeg,bmp,png'],
+        // ], [
+        //     'prod_name.required' => 'Product name is required',
+        //     'buy_date.required' => 'Date is required',
+        //     'img.required' => 'Image is required',
+        // ]);
 
-        if ($request->hasFile('file')) {
 
-            // $request->validate([
-            //     'image' => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
-            // ]);
+        $size = '';
+        if (is_null($request->input('size_clothes')))
+            $size = $request->input('size_shoes');
+        else
+            $size = $request->input('size_clothes');
+
+        $descr = $request->input('descr');
+        if (!isset($descr))
+            $descr = '';
+
+        if ($request->hasFile('img')) {
 
             // Save the file locally in the storage/public/ folder under a new folder named /product
-            $request->file->store('prod_image', 'public');
+            $request->img->store('prod_image', 'public');
 
             // Store the record, using the new file hashname which will be it's new filename identity.
-            $product = new Products([
+            $product = Products::create([
                 "prod_name" => $request->input('prod_name'),
-                "descr" => $request->input('descr'),
+                "descr" => $descr,
                 'buy_date' => $request->input('buy_date'),
                 'condition' => $request->input('condition'),
                 'material' => $request->input('material'),
+                'size' => $size,
+                'category_id' => $request->input('category'),
                 // 'created_at' => $request->now(),
-                "img" => $request->file->hashName()
-            ]);
-
-            $product->save(); 
-        } else {
-            $product = new Products([
-                "prod_name" => $request->input('prod_name'),
-                "descr" => $request->input('descr'),
-                'buy_date' => $request->input('buy_date'),
-                'condition' => $request->input('condition'),
-                'material' => $request->input('material'),
-                // 'created_at' => $request->now(),
+                "img" => $request->img->hashName()
             ]);
             $product->save();
         }
+
+            // } else {
+            //     $product = Products::create([
+            //         "prod_name" => $request->input('prod_name'),
+            //         "descr" => $descr,
+            //         'buy_date' => $request->input('buy_date'),
+            //         'condition' => $request->input('condition'),
+            //         'size' => $size,
+            //         'category_id' => $request->input('category'),
+            //         'material' => $request->input('material'),
+            //         // 'created_at' => $request->now(),
+            //     ]);
+            //     $product->save();
+            // }
         return redirect()->route('products');
     }
 }

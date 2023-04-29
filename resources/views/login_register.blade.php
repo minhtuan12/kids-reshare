@@ -209,6 +209,7 @@
             </form>
         </div>
     </div>
+    {{-- <script type="text/javascript" src="scripts/Login_Register.js"></script> --}}
     <script>
         validator({
             form: '.form-2',
@@ -227,7 +228,5 @@
             alert(msg);
         }
     </script>
-@endsection
-{{-- </body>
-
+    {{-- </body>
 </html>  --}}

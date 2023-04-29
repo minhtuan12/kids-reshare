@@ -32,6 +32,8 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('i
 // Route::view('/indexx1', 'indexx1')->name('indexx1');
 
 Route::view('/products', 'products')->name('products');
+Route::post('/products', [\App\Http\Controllers\ProductController::class, 'filter'])
+    ->name('products.filter');
 
 // Route::get('/login', [\App\Http\Controllers\LoginController::class, 'create'])
 //     ->name('login');

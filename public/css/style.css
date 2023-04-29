@@ -35,12 +35,12 @@ nav a{
 	transition: 0.3s ease;
 }
 nav a :hover,
-nav a.active{
+nav a.active1{
     color: #088178;
 	position: relative;
 }
 
-nav a.active:after{
+nav a.active1:after{
 	content: "";
 	width: 50%;
 	height: 2px;
@@ -146,7 +146,6 @@ p{
 }
 
 .title::after{
-	content: ;
 	background: #ff523b;
 	width: 80px;
 	height: 5px;

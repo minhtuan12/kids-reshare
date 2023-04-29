@@ -12,8 +12,17 @@ class ProductController extends Controller
 {
     public function create()
     {
+        // $products = Products::all();
+        $cate_products = new CategoryController();
+        $cate_products = $cate_products->show();
         $products = Products::all();
-        return view('products', compact('products'));
+        return view('products', compact('products', 'cate_products'));
     }
 
+    public function filter()
+    {
+        // $products = Products::filter('category')->get();
+        $productss = Products::filter(['category'])->get();
+        return view('products.filter', compact('productss'));
+    }
 }

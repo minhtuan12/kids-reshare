@@ -74,6 +74,13 @@
 
 {{-- @endsection --}}
 
+
+
+
+
+
+
+
 @extends('layouts.layout')
 
 @section('title')
@@ -85,7 +92,27 @@
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css">
 @stop
 
+@section('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        var baby_count = 0;
+        $(document).ready(function() {
+            $(".add-row").click(function() {
+                var $clone = $("div.baby_details").first().clone();
+                $clone.append("<button type='button' class='remove-row'>-</button>");
+                $clone.insertBefore(".add-row");
+                baby_count ++;
+            });
+
+            $(".form-style-9").on("click", ".remove-row", function() {
+                $(this).parent().remove();
+            });
+        });
+    </script>
+@stop
+
 @section('content')
+    @php($id = Auth::user()->id)
     <div class="flex flex-col md:flex-row">
         <div id="main" class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
 
@@ -126,9 +153,9 @@
                             <input
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-password" disabled type="password" placeholder="******************">
-                            <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> <br>
+                            {{-- <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p> <br> --}}
                         </div>
-                        <div class="w-full px-3">
+                        {{-- <div class="w-full px-3">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                 for="grid-password">
                                 Confirm Password
@@ -136,17 +163,17 @@
                             <input
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="grid-password" disabled type="password" placeholder="******************">
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-2">
                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                 for="grid-city">
-                                Location
+                                Address
                             </label>
                             <input
                                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="grid-city" type="text" placeholder="Albuquerque">
+                                id="grid-city" disabled type="text" placeholder="Albuquerque">
                         </div>
                         <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -156,7 +183,8 @@
                             <div class="relative">
                                 <select
                                     class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                    id="my_select" onchange="myFunction(this.options[this.selectedIndex].value)">
+                                    id="my_select" name="kid_number"
+                                    onchange="myFunction(this.options[this.selectedIndex].value)">
                                     <option value=1>1</option>
                                     <option value=2>2</option>
                                     <option value=3>3</option>
@@ -175,124 +203,82 @@
                         <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0 flex">
                             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                                 style="margin:10px 5px 5px 10px  ">
-                                Change
+                                <a href="{{ route('account.createUpdate', ['id' => $id]) }}"> Change </a>
                             </button>
-                            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                            {{-- <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                                 style="margin:10px 5px 5px 10px  ">
                                 Accept
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                 </form>
-
             </div>
+
 
             {{-- kids data --}}
-            <div>
-                <form id="baby_1">
-                    <label for="name">Date of birth</label>
-                    <input type="date" name="age" id="" />
 
-                    <label for="name">Gender</label>
-                    <input type="radio" id="male" name="gender" value="1">
-                    <label for="">Male</label>
-                    <input type="radio" id="female" name="gender" value="0">
-                    <label for="">Female</label>
+            <form action="{{ route('account.store', ['id' => $id]) }}" method="POST" class="form-style-9">
+                @csrf
 
-                    <label for="buy_date">Height</label>
-                    <input type="number" name="height" id="" placeholder="Height" />
+                <div class="baby_details" name="kids[]">
+                    {{-- <form id="baby_1" style="display:block"> --}}
+                    <li>
+                        <ul class="column">
+                            <li>
+                                <label for="name">Date of birth</label>
+                                <input type="date" name="age[]" id="" />
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="column">
+                            <li>
+{{--                                <label for="name">Gender</label>--}}
+                                <select name="gender[]" id="" >
+                                    <option disabled>--Gender--</option>
+                                    <option value="0">Male</option>
+                                    <option value="1">Female</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="column">
+                            <li>
+                                <label for="buy_date">Height</label>
+                                <input type="number" name="height[]" id="" placeholder="Height" />
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="column">
+                            <li>
+                                <label for="material">Weight</label>
+                                <input type="number" name="weight[]" id="" placeholder="Weight" />
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="column">
+                            <li>
+                                <label for="note" class="col-form-label">Note</label>
+                                <textarea name="take_note[]" id="" rows="4" class="form-control" placeholder=" Note" style="margin: 5px;"></textarea>
+                            </li>
+                        </ul>
+                    </li>
+                </div>
 
-                    <label for="material">Weight</label>
-                    <input type="number" name="weight" id="" placeholder="Weight" />
-
-                    <label for="note" class="col-form-label">Note</label>
-                    <textarea name="note" id="" rows="5" class="form-control" placeholder=" Note" style="margin: 5px;"></textarea>
-
-                    <button type="submit">
-                        <i class="fa fa-check-circle" style="padding-right: 5px;"></i>Save
-                    </button>
-                </form>
-
-
-                <form id="baby_2" style="display: none">
-                    <label for="name">Date of birth</label>
-                    <input type="date" name="age" id="" />
-
-                    <label for="name">Gender</label>
-                    <input type="radio" id="male" name="gender" value="1">
-                    <label for="">Male</label>
-                    <input type="radio" id="female" name="gender" value="0">
-                    <label for="">Female</label>
-
-                    <label for="buy_date">Height</label>
-                    <input type="number" name="height" id="" placeholder="Height" />
-
-                    <label for="material">Weight</label>
-                    <input type="number" name="weight" id="" placeholder="Weight" />
-
-                    <label for="note" class="col-form-label">Note</label>
-                    <textarea name="note" id="" rows="5" class="form-control" placeholder=" Note"
-                        style="margin: 5px;"></textarea>
-
-                    <button type="submit">
-                        <i class="fa fa-check-circle" style="padding-right: 5px;"></i>Save
-                    </button>
-                </form>
-
-                <form id="baby_3" style="display: none">
-                    <label for="name">Date of birth</label>
-                    <input type="date" name="age" id="" />
-
-                    <label for="name">Gender</label>
-                    <input type="radio" id="male" name="gender" value="1">
-                    <label for="">Male</label>
-                    <input type="radio" id="female" name="gender" value="0">
-                    <label for="">Female</label>
-
-                    <label for="buy_date">Height</label>
-                    <input type="number" name="height" id="" placeholder="Height" />
-
-                    <label for="material">Weight</label>
-                    <input type="number" name="weight" id="" placeholder="Weight" />
-
-                    <label for="note" class="col-form-label">Note</label>
-                    <textarea name="note" id="" rows="5" class="form-control" placeholder=" Note"
-                        style="margin: 5px;"></textarea>
-
-                    <button type="submit">
-                        <i class="fa fa-check-circle" style="padding-right: 5px;"></i>Save
-                    </button>
-                </form>
-
-                <form id="baby_4" style="display: none">
-                    <label for="name">Date of birth</label>
-                    <input type="date" name="age" id="" />
-
-                    <label for="name">Gender</label>
-                    <input type="radio" id="male" name="gender" value="1">
-                    <label for="">Male</label>
-                    <input type="radio" id="female" name="gender" value="0">
-                    <label for="">Female</label>
-
-                    <label for="buy_date">Height</label>
-                    <input type="number" name="height" id="" placeholder="Height" />
-
-                    <label for="material">Weight</label>
-                    <input type="number" name="weight" id="" placeholder="Weight" />
-
-                    <label for="note" class="col-form-label">Note</label>
-                    <textarea name="note" id="" rows="5" class="form-control" placeholder=" Note"
-                        style="margin: 5px;"></textarea>
-
-                    <button type="submit">
-                        <i class="fa fa-check-circle" style="padding-right: 5px;"></i>Save
-                    </button>
-                </form>
-            </div>
+                <button type="button" class="add-row">+</button>
+                {{-- </form> --}}
+                <button type="submit">
+                    <i class="fa fa-check-circle" style="padding-right: 5px;"></i>Save
+                </button>
+            </form>
         </div>
     </div>
 @endsection
-<script>
+
+{{-- <script>
     console.log(1);
     const el = document.getElementById("my_select");
     console.log(el);
@@ -321,7 +307,7 @@
         }
 
     }
-</script>
+</script> --}}
 {{--
 
 </html>

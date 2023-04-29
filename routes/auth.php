@@ -77,13 +77,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/account/{id}', [\App\Http\Controllers\Auth\AccountController::class, 'userInfo'])
         ->name('account.create');
+        
+    Route::post('/account/{id}', [\App\Http\Controllers\Auth\AccountController::class, 'kidInfo'])
+        ->name('account.store');
 
     Route::get('/account/{id}/update', [\App\Http\Controllers\Auth\AccountController::class, 'create'])
         ->name('account.createUpdate');
 
     Route::patch('/account/{id}/update', [\App\Http\Controllers\Auth\AccountController::class, 'update'])
         ->name('account.update');
-
-    Route::post('/account/{id}', [\App\Http\Controllers\Auth\AccountController::class, 'kidInfo'])
-        ->name('account.store');
 });

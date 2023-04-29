@@ -42,15 +42,15 @@ nav a{
 	text-decoration: none;
 	color: #555;
 	transition: 0.3s ease;
-    fon
 }
+
 nav a :hover,
-nav a.active{
+nav a.active3{
     color: #088178;
 	position: relative;
 }
 
-nav a.active:after{
+nav a.active3:after{
 	content: "";
 	width: 50%;
 	height: 2px;
@@ -92,7 +92,7 @@ label{
     border-style: none;
     font-size: 1rem;
 }
-.card_body input{
+.card_body input,select{
     padding: 8px 12px;
     margin: 5px;
 }
