@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
+    public function index($id = null)
+    {
+        if ($id == null)
+            return Products::orderBy('prod_name', 'asc')->get();
+        return response(['data'=>Products::find($id), 'view'=>'products']);
+    }
+
     public function create()
     {
         // $products = Products::all();

@@ -4,14 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Validator;
 
 class Products extends Model
 {
     use HasFactory;
-
+    protected $table = 'products';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'prod_name',
+        'user_id',
         'descr',
         'buy_date',
         'condition',
@@ -21,14 +24,19 @@ class Products extends Model
         'img',
     ];
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class, 'category_id');
-    }
-
     public function scopeFilter($query, $filters)
     {
         if (isset($filters['category']))
             $query->where('category_name', '=', $filters['category']);
+    }
+
+    public function user():BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function category():BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

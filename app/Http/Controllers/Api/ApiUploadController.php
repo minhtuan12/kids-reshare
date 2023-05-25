@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,11 +13,11 @@ use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
-class UploadController extends Controller
+class ApiUploadController extends Controller
 {
     public function create()
     {
-        $cate_products = new CategoryController();
+        $cate_products = new ApiCategoryController();
         $cate_products = $cate_products->show();
         return view('upload')->with('cate_products', $cate_products);
     }

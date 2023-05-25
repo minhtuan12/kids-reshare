@@ -19,10 +19,10 @@
 @endsection
 
 @section('styles')
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('https://fonts.googleapis.com/css?family=Raleway') }}" rel="stylesheet" />
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('https://fonts.googleapis.com/css?family=Raleway') }}" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styleUpload.css') }}">
 @stop
 
@@ -33,106 +33,107 @@
 @section('content')
 
     <body>
-        {{-- <section class="header">
-            <div class="navbar">
-                <div class="logo">
-                    <a href="{{ route('index') }}"><img src="{{ asset('images/logo.png') }}" width="180px"
-                            style="margin-left: 10px;"></a>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="{{ route('index') }}">Home</a></li>
-                        <li><a href="{{ route('products') }}">Products</a></li>
-                        <li><a class="active" href="{{ route('upload') }}">Donate</a></li>
-                        <li><a href="#">Account</a></li>
-                        <li><a href="{{ route('login_register') }}">Register/Login</a></li>
-                    </ul>
-                </nav>
-        </section> --}}
-
-        <div class="card">
-            <div class="card_header">
-                <strong><i class="fa fa-plus"></i> Add New Product</strong>
+    {{-- <section class="header">
+        <div class="navbar">
+            <div class="logo">
+                <a href="{{ route('index') }}"><img src="{{ asset('images/logo.png') }}" width="180px"
+                        style="margin-left: 10px;"></a>
             </div>
-            <div class="card_body">
-                <form action="{{ route('upload') }}" method="post" style="display:grid" enctype="multipart/form-data">
-                    @csrf
+            <nav>
+                <ul>
+                    <li><a href="{{ route('index') }}">Home</a></li>
+                    <li><a href="{{ route('products') }}">Products</a></li>
+                    <li><a class="active" href="{{ route('upload') }}">Donate</a></li>
+                    <li><a href="#">Account</a></li>
+                    <li><a href="{{ route('login_register') }}">Register/Login</a></li>
+                </ul>
+            </nav>
+    </section> --}}
 
-                    <label for="name">Name new product</label>
-                    <input type="text" name="prod_name" id="prod_name" placeholder="Name new product" />
+    <div class="card">
+        <div class="card_header">
+            <strong><i class="fa fa-plus"></i> Add New Product</strong>
+        </div>
+        <div class="card_body">
+            <form action="{{ route('upload') }}" method="post" style="display:grid" enctype="multipart/form-data">
+                @csrf
 
-                    <label for="name">Category</label>
-                    {{-- <input type="text" name="category" id="" placeholder="Category" /> --}}
-                    <select id="my_select" name="category" onchange="myFunction(this.options[this.selectedIndex].value)">
-                        @foreach ($cate_products as $cate_product)
-                            <option name="category" value="{{ $cate_product->id }}">{{ $cate_product->category_name }}
-                            </option>
-                        @endforeach
-                    </select>
+                <label for="name">Name new product</label>
+                <input type="text" name="prod_name" id="prod_name" placeholder="Name new product"/>
 
-                    <label for="buy_date">Buy date</label>
-                    <input type="date" name="buy_date" id="buy_date" />
+                <label for="name">Category</label>
+                {{-- <input type="text" name="category" id="" placeholder="Category" /> --}}
+                <select id="my_select" name="category" onchange="myFunction(this.options[this.selectedIndex].value)">
+                    @foreach ($cate_products as $cate_product)
+                        <option name="category" value="{{ $cate_product->id }}">{{ $cate_product->category_name }}
+                        </option>
+                    @endforeach
+                </select>
 
-                    <label id="size_clothesc" for="size_clothes">Size</label>
-                    <select id="size_clothes" name="size_clothes">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">Over Size</option>
-                    </select>
+                <label for="buy_date">Buy date</label>
+                <input type="date" name="buy_date" id="buy_date"/>
 
-                    <label id="size_shoess" for="size_shoes" style="display: none">Size</label>
-                    <select id="size_shoes" style="display: none" name="size_shoes">
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
-                        <option value="32">32</option>
-                        <option value="33">33</option>
-                        <option value="34">34</option>
-                        <option value="35">35</option>
-                        <option value="36">36</option>
-                    </select>
+                <label id="size_clothesc" for="size_clothes">Size</label>
+                <select id="size_clothes" name="size_clothes">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">Over Size</option>
+                </select>
 
-                    <label for="material">Material</label>
-                    <input type="text" name="material" id="" placeholder="Marterial" />
+                <label id="size_shoess" for="size_shoes" style="display: none">Size</label>
+                <select id="size_shoes" style="display: none" name="size_shoes">
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                    <option value="33">33</option>
+                    <option value="34">34</option>
+                    <option value="35">35</option>
+                    <option value="36">36</option>
+                </select>
+
+                <label for="material">Material</label>
+                <input type="text" name="material" id="" placeholder="Marterial"/>
 
 
-                    <label for="condition">Condition</label>
-                    <input style="width:20%" type="range" name="condition" id="" placeholder="Condition"
-                        min="1" max="100" oninput="this.nextElementSibling.value = this.value" />
-                    <output>50</output>
+                <label for="condition">Condition</label>
+                <input style="width:20%" type="range" name="condition" id="" placeholder="Condition"
+                       min="1" max="100" oninput="this.nextElementSibling.value = this.value"/>
+                <output>50</output>
 
-                    <label for="note" class="col-form-label">Description</label>
-                    <textarea name="descr" id="" rows="5" class="form-control" placeholder=" Description"
-                        style="margin: 5px;"></textarea>
+                <label for="note" class="col-form-label">Description</label>
+                <textarea name="descr" id="" rows="5" class="form-control" placeholder=" Description"
+                          style="margin: 5px;"></textarea>
 
-                    <input type="file" name="img" id="img">
+                <input type="file" name="img" id="img">
 
-                    <button type="submit">
-                        <i class="fa fa-check-circle" style="padding-right: 5px; width: 100px"></i>Upload
-                    </button>
+                <button type="submit">
+                    <i class="fa fa-check-circle" style="padding-right: 5px; width: 100px"></i>Upload
+                </button>
+
             </form>
         </div>
     </div>
@@ -169,6 +170,6 @@
             document.getElementById('textInput').value = val;
         }
     </script>
-</body>
+    </body>
 @endsection
 {{-- </html> --}}

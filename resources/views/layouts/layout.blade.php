@@ -27,7 +27,7 @@
                     <li><a href="{{ route('products') }}">Products</a></li>
                     <li><a href="{{ route('upload') }}">Donate</a></li>
                     @auth
-                        @php($id = Auth::user()->id)
+                        @php($id = Auth::User()->id)
                         <li><a href="{{ route('account.create', ['id' => $id]) }}">Account</a></li>
                         <li><a href="{{ route('logout') }}">Log out</a></li>
                     @else

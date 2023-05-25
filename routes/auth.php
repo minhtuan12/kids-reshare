@@ -44,7 +44,6 @@ Route::middleware('guest')->group(function () {
         ->name('login_register.login');
 });
 
-
 Route::middleware('auth')->group(function () {
     //     Route::get('verify-email', EmailVerificationPromptController::class)
     //                 ->name('verification.notice');
@@ -75,15 +74,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/logout', [\App\Http\Controllers\Auth\LogController::class, 'logout'])
         ->name('logout');
 
+
     Route::get('/account/{id}', [\App\Http\Controllers\Auth\AccountController::class, 'userInfo'])
         ->name('account.create');
-        
-    Route::post('/account/{id}', [\App\Http\Controllers\Auth\AccountController::class, 'kidInfo'])
-        ->name('account.store');
 
-    Route::get('/account/{id}/update', [\App\Http\Controllers\Auth\AccountController::class, 'create'])
-        ->name('account.createUpdate');
+    Route::post('/account/{id}', [\App\Http\Controllers\Auth\AccountController::class, 'kidInfo'])
+        ->name('kidStore');
+
+    Route::patch('/account/{id}', [\App\Http\Controllers\Auth\AccountController::class, 'updateKidInfo'])
+        ->name('updateKid');
+
+//    Route::get('/account/{id}/update', [\App\Http\Controllers\Auth\AccountController::class, 'create'])
+//        ->name('account.createUpdate');
 
     Route::patch('/account/{id}/update', [\App\Http\Controllers\Auth\AccountController::class, 'update'])
         ->name('account.update');
 });
+
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'create'])
+    ->name('admin');
+
+

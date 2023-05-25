@@ -37,9 +37,13 @@
 @endsection
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/styleProducts.css') }}">
-    <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css') }}">
+    <link rel="stylesheet" href="css/styleProducts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+@stop
+
+@section('scripts')
+
 @stop
 
 @section('content')
@@ -87,42 +91,24 @@
                         <hr>
                         @foreach ($cate_products as $cate_product)
                             <input type="radio" name="category" class="blog-sidebar-list"
-                                value="{{ $cate_product->category_name }}"><b>{{ $cate_product->category_name }}</b> <br>
+                                   value="{{ $cate_product->category_name }}"><b>{{ $cate_product->category_name }}</b>
+                            <br>
                         @endforeach
                         <div>&nbsp;</div>
                         <div>&nbsp;</div>
 
                         <h2 class="blog-sidebar-title"><b>Filter</b></h2>
                         <hr>
-
-                        {{-- <div class="input-group mb-3">
-                            <div style="width: 100%">
-                                <label style="width: 100%" for="condition">Condition</label>
-                                <input style="width:75%" type="range" name="condition" id=""
-                                    placeholder="Condition" min="1" max="100"
-                                    oninput="this.nextElementSibling.value = this.value " />
-                                <output>50</output>
-                                <label>%</label>
-                            </div>
-
-                            <div style="width: 100%">
-                                <label style="width: 100%" for="size">Size</label>
-                                <input style="width:75%" type="range" name="condition" id=""
-                                    placeholder="Condition" min="1" max="36"
-                                    oninput="this.nextElementSibling.value = this.value" />
-                                <output>18</output>
-                            </div>
-                        </div> --}}
-                        
+                    </div>
                 </form>
                 <form action="{{ route('products.filter') }}" method="POST">
                     {{ csrf_field() }}
 
-                    <input type="text" name="category" />
+                    <input type="text" name="category"/>
 
-                    <input type="submit" value="Filter" />
+                    <input type="submit" value="Filter"/>
                 </form>
-        
+
                 <button type="submit" class="btn btn-dark btn-lg">Filter</button>
                 <div>&nbsp;</div>
                 <div>&nbsp;</div>
@@ -162,7 +148,7 @@
                 <div>&nbsp;</div>
                 <div>&nbsp;</div>
 
-                <div class="row">
+                <div id="products" class="row">
                     <div class="col-sm-3 col-md-6 col-lg-4">
                         @foreach ($products as $product)
                             <div class="pro">
@@ -183,61 +169,77 @@
                 <div>&nbsp;</div>
                 <div>&nbsp;</div>
 
-                <div class="row">
-                    <div class="col-sm-3 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <img src="img/coffee_item1.jpg" class="product-image">
-                                <h5 class="card-title"><b>Gold Accessory</b></h5>
-                                <p class="card-text small">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                                <p class="tags">Price $16</p>
-                                <a href="#" class="btn btn-success button-text"><i class="fa fa-shopping-cart"
-                                        aria-hidden="true"></i> Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
+                {{--                <div class="row">--}}
+                {{--                    <div class="col-sm-3 col-md-6 col-lg-4">--}}
+                {{--                        <div class="card">--}}
+                {{--                            <div class="card-body text-center">--}}
+                {{--                                <img src="img/coffee_item1.jpg" class="product-image">--}}
+                {{--                                <h5 class="card-title"><b>Gold Accessory</b></h5>--}}
+                {{--                                <p class="card-text small">With supporting text below as a natural lead-in to additional--}}
+                {{--                                    content.</p>--}}
+                {{--                                <p class="tags">Price $16</p>--}}
+                {{--                                <a href="#" class="btn btn-success button-text"><i class="fa fa-shopping-cart"--}}
+                {{--                                        aria-hidden="true"></i> Add to cart</a>--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
 
-                    <div class="col-sm-3 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <img src="img/coffee_item2.jpg" class="product-image">
-                                <h5 class="card-title"><b>Lating Accessory</b></h5>
-                                <p class="card-text small">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                                <p class="tags">Price $26</p>
-                                <a href="#" class="btn btn-success button-text"><i class="fa fa-shopping-cart"
-                                        aria-hidden="true"></i> Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
+                {{--                    <div class="col-sm-3 col-md-6 col-lg-4">--}}
+                {{--                        <div class="card">--}}
+                {{--                            <div class="card-body text-center">--}}
+                {{--                                <img src="img/coffee_item2.jpg" class="product-image">--}}
+                {{--                                <h5 class="card-title"><b>Lating Accessory</b></h5>--}}
+                {{--                                <p class="card-text small">With supporting text below as a natural lead-in to additional--}}
+                {{--                                    content.</p>--}}
+                {{--                                <p class="tags">Price $26</p>--}}
+                {{--                                <a href="#" class="btn btn-success button-text"><i class="fa fa-shopping-cart"--}}
+                {{--                                        aria-hidden="true"></i> Add to cart</a>--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
 
-                    <div class="col-sm-3 col-md-6 col-lg-4">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <img src="img/coffee_item6.jpg" class="product-image">
-                                <h5 class="card-title"><b>American Black Coffee</b></h5>
-                                <p class="card-text small">With supporting text below as a natural lead-in to
-                                    additional
-                                    content.</p>
-                                <p class="tags">Price $50</p>
-                                <a href="#" class="btn btn-success button-text"><i class="fa fa-shopping-cart"
-                                        aria-hidden="true"></i> Add to cart</a>
-                            </div>
-                        </div>
-                    </div>
+                {{--                    <div class="col-sm-3 col-md-6 col-lg-4">--}}
+                {{--                        <div class="card">--}}
+                {{--                            <div class="card-body text-center">--}}
+                {{--                                <img src="img/coffee_item6.jpg" class="product-image">--}}
+                {{--                                <h5 class="card-title"><b>American Black Coffee</b></h5>--}}
+                {{--                                <p class="card-text small">With supporting text below as a natural lead-in to--}}
+                {{--                                    additional--}}
+                {{--                                    content.</p>--}}
+                {{--                                <p class="tags">Price $50</p>--}}
+                {{--                                <a href="#" class="btn btn-success button-text"><i class="fa fa-shopping-cart"--}}
+                {{--                                        aria-hidden="true"></i> Add to cart</a>--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
 
-                </div>
+                {{--                </div>--}}
                 <!-- Sorting by <div class="row"> -->
-
 
 
             </div>
             <!--END  <div class="col-lg-9">-->
-
-        </div>
+            <div id="load-more"> load more</div>
         </div>
     </section>
+    <script>
+
+        let loadMoreBtn = document.querySelector('#load-more');
+        let currentItem = 3;
+
+        loadMoreBtn.onclick = () => {
+            let boxes = [...document.querySelectorAll('.page-section .container .row')];
+            for (var i = currentItem; i < currentItem + 3; i++) {
+                boxes[i].style.display = 'inline-block';
+            }
+            currentItem += 3;
+
+            if (currentItem >= boxes.length) {
+                loadMoreBtn.style.display = 'none';
+            }
+        }
+
+    </script>
     {{-- </body> --}}
 @endsection
 {{-- </html> --}}

@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class KidProfile extends Model
 {
     protected $table = "kid_info";
-
+    protected $primaryKey = 'id';
     protected $fillable = [
         'age',
         'gender',
@@ -18,8 +19,9 @@ class KidProfile extends Model
         'take_note',
     ];
 
-    public function user() {
-        return $this->belongsTo(user::class, 'user_id');
+    public function user():BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

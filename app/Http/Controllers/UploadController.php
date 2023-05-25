@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Image;
 use App\Models\Products;
@@ -50,6 +51,7 @@ class UploadController extends Controller
             // Store the record, using the new file hashname which will be it's new filename identity.
             $product = Products::create([
                 "prod_name" => $request->input('prod_name'),
+                "user_id" => Auth::id(),
                 "descr" => $descr,
                 'buy_date' => $request->input('buy_date'),
                 'condition' => $request->input('condition'),

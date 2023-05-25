@@ -9,7 +9,7 @@ function validator(object) {
             var errorMessage = rule.test(inputElement.value)
             if (errorMessage) {
                  errorElement.innerText = errorMessage
-            } else { 
+            } else {
                 errorElement.innerText = ''
             }
         }

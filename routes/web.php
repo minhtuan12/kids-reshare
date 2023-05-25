@@ -48,32 +48,37 @@ Route::post('/products', [\App\Http\Controllers\ProductController::class, 'filte
 //     ->name('register');
 
 // Route::middleware('guest')->group(function () {
-//     Route::get('/login_register', [\App\Http\Controllers\Auth\LogRegController::class, 'create'])
+//     Route::get('/login_register', [\App\Http\Controllers\Auth\ApiLogRegController::class, 'create'])
 //         ->name('login_register');
 
-//     Route::post('/login_register/register', [\App\Http\Controllers\Auth\LogRegController::class, 'register'])
+//     Route::post('/login_register/register', [\App\Http\Controllers\Auth\ApiLogRegController::class, 'register'])
 //         ->name('login_register.register');
 
-//     Route::post('/login_register/login', [\App\Http\Controllers\Auth\LogController::class, 'login'])
+//     Route::post('/login_register/login', [\App\Http\Controllers\Auth\ApiLogController::class, 'login'])
 //         ->name('login_register.login');
 
 //     // Route::post('/login_register', [\App\Http\Controllers\LoginController::class, 'login'])
 //     //     ->name('login_register');
 
-//     // Route::post('/login_register', [\App\Http\Controllers\LogRegController::class, 'login'])
+//     // Route::post('/login_register', [\App\Http\Controllers\ApiLogRegController::class, 'login'])
 //     //     ->name('login_register.login');
 // });
 
 // Route::middleware('auth')->group(function () {
-//     Route::get('/upload', [\App\Http\Controllers\UploadController::class, 'create'])
+//     Route::get('/upload', [\App\Http\Controllers\ApiUploadController::class, 'create'])
 //         ->name('upload');
 
-//     Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'store'])
+//     Route::post('/upload', [\App\Http\Controllers\ApiUploadController::class, 'store'])
 //         ->name('upload');
 // });
 
 Route::get('/products', [\App\Http\Controllers\ProductController::class, 'create'])
     ->name('products');
+
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'create'])
+    ->name('admin');
+//Route::post('/admin', [\App\Http\Controllers\ApiAdminController::class, 'store'])
+//    ->name('admin');
 
 // Route::get('/img', [\App\Http\Controllers\ImageController::class, 'create'])
 //     ->name('img');

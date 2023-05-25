@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api;
+
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -9,7 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
-class LogRegController extends Controller
+class ApiLogRegController extends Controller
 {
     use RegistersUsers;
 
@@ -29,7 +30,7 @@ class LogRegController extends Controller
     {
         $this->middleware('guest');
     }
-    
+
     public function create()
     {
         return view('login_register');
@@ -42,7 +43,7 @@ class LogRegController extends Controller
         //     'password' => ['required', 'confirmed'],
         //     'phone' => ['size: 10', 'unique: username', 'numeric'],
         // ]);
-        
+
         // $allRequest = $request->all();
         // $validator = $this->validator($allRequest);
         $user = user::create([
@@ -52,10 +53,10 @@ class LogRegController extends Controller
             // 'created_at' => now(),
             // 'modified_at' => now(),
         ]);
-        
-        if ($request->input('cfPassword') != $request->input('password')) 
+
+        if ($request->input('cfPassword') != $request->input('password'))
             return redirect()->route('login_register.register')->with('wrong', 'PLEASE CONFIRM PASSWORD!');
-        
+
         $user->save();
         return redirect()->route('login_register');
     }

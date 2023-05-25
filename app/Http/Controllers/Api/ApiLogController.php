@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api;
+
 
 use App\Http\Controllers\Controller;
 use App\Models\user;
@@ -13,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
 
-class LogController extends Controller
+class ApiLogController extends Controller
 {
     // use AuthenticatesUsers;
 
