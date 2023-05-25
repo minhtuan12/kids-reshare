@@ -119,7 +119,7 @@ Upload
                 
                 <label for="condition">Condition</label>
                 <input style="width:20%" type="range" name="condition" id="" placeholder="Condition" min="1" max="100"  oninput="this.nextElementSibling.value = this.value" />
-                <output>50</output>
+                <output style="display: flex">50%</output>
 
                 <label for="note" class="col-form-label">Description</label>
                 <textarea name="descr" id="" rows="5" class="form-control" placeholder=" Description"

@@ -1,25 +1,14 @@
-* {
-    margin: 0;
+*{
+	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Raleway', sans-serif;
 }
-body {
-    font-family: 'Raleway', sans-serif;
-}
-ul , li {
-	text-decoration: none;
+ul ,li {
 	text-decoration: none;
 	list-style-type: none;
 }
-#home{
-    text-decoration: none;
-    font-size: 1.2rem;
-    padding-left: 30px;
-    padding-bottom: 8px;
-    font-weight: 600;
-    color: #555;
-}
+
 .navbar{
 	display: flex;
 	align-items: center;
@@ -50,24 +39,10 @@ nav ul li{
 nav a{
 	text-decoration: none;
 	color: #555;
-	font-size: 1.2rem;
+	font-size: 19.2px;
 	transition: 0.3s ease;
 }
-nav a :hover,
-nav a.active3{
-    color: #088178;
-	position: relative;
-}
 
-nav a.active3:after{
-	content: "";
-	width: 50%;
-	height: 2px;
-	background:#088178;
-	position: absolute;
-	bottom: -4px;
-	left: 0;
-}
  
 .sub-menu-link{
 	display: flex;
@@ -159,37 +134,4 @@ nav a.active3:after{
 }
 p{
 	color: #555;
-}
-.card{
-    max-width: 1140px;
-    margin: 0 auto;
-    border: 1px solid #ffd6d6;
-    border-radius: 5px;
-	margin-top: 50px;
-}
-.card_header{
-    background-color: #ffd6d6;
-    color: #6e0101;
-    padding: 15px;
-}
-.card_body{
-    padding: 20px 20px 10px 20px;
-}
-label{
-    padding-top: 10px;
-}
-.card_body button{
-    margin: 20px 0px;
-    color: white;
-    background-color: rgb(40, 167, 69);
-    height: 40px;
-    width: 80px;
-    padding: 12px 8px;
-    border-radius: 4px;
-    border-style: none;
-    font-size: 1rem;
-}
-.card_body input,select{
-    padding: 8px 12px;
-    margin: 5px;
 }

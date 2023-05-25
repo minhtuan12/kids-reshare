@@ -1,0 +1,4 @@
+INSERT INTO category (category_name, status, created_at, updated_at) VALUES ('clothes', '1', '2023-04-29 19:08:13', '2023-04-29 19:08:13');
+INSERT INTO category (category_name, status, created_at, updated_at) VALUES ('shoes', '1', '2023-04-29 19:08:34', '2023-04-29 19:08:34');
+INSERT INTO category (category_name, status, created_at, updated_at) VALUES ('accessories', '1', '2023-04-29 19:09:05', '2023-04-29 19:09:05');
+INSERT INTO category (category_name, status, created_at, updated_at) VALUES ('others', '1', '2023-04-29 19:09:31', '2023-04-29 19:09:31');

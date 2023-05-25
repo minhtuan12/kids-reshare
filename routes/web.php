@@ -71,8 +71,12 @@ Route::view('/products', 'products')->name('products');
 //         ->name('upload');
 // });
 
+Route ::get('/products/filter', [\App\Http\Controllers\ProductController::class , 'filter_products'])
+    ->name('filter_products');
 Route::get('/products', [\App\Http\Controllers\ProductController::class, 'create'])
     ->name('products');
+Route::get('/products/{id}' ,[\App\Http\Controllers\ProductController::class, 'product_detail'] )
+    ->name('/products.detail');
 
 // Route::get('/img', [\App\Http\Controllers\ImageController::class, 'create'])
 //     ->name('img');

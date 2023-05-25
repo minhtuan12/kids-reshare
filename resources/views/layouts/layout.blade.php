@@ -26,13 +26,46 @@
                     <li><a class="active1" href="{{ route('index') }}">Home</a></li>
                     <li><a class="active2" href="{{ route('products') }}">Products</a></li>
                     <li><a class="active3"href="{{ route('upload') }}">Donate</a></li>
-                    <li><a class="active4" href="#">Account</a></li>
+                  </ul>
                     @auth
-                        <li><a class="active5" href="{{ route('logout') }}">Log out</a></li>
+                    <img class="user-pic"  src="{{asset('images/personal.png')}}" onclick="toggleMenu()" >
+                    <div class="sub-menu-wrap" id="subMenu">
+                      <div class="sub-menu">
+                        @if(isset(Auth::user()->fullname))
+                          <div class="user-infor">
+                            <img class="user-pic" src="{{asset('images/personal.png')}}" >
+                            <h2>Hi: {{Auth::user()->fullname}}</h2>
+                          </div>
+                        @endif
+                        <hr>
+
+                        <a href="{{ route('account') }}" class="sub-menu-link">
+                          <img src="{{asset('images/profile.png')}}" alt="">
+                          <p>Profile</p>
+                          <span>></span>
+                        </a>
+
+                        <a href="{{route('p_manage')}}" class="sub-menu-link">
+                          <img src="{{asset('images/donated.png')}}" alt="">
+                          <p>Donated</p>
+                          <span>></span>
+                        </a>
+
+                        
+
+                        <a href="{{route('logout')}}" class="sub-menu-link">
+                          <img src="{{asset('images/logout.png')}}" alt="">
+                          <p>Logout</p>
+                          <span>></span>
+                        </a>
+
+
+                      </div>
+                    </div>
                     @else
-                        <li><a class="active5" href="{{ route('login_register') }}">Register/Login</a></li>
+                        <li><a href="{{ route('login_register') }}">Register/Login</a></li>
                     @endauth
-                </ul>
+               
             </nav>
         </div>
 
@@ -45,7 +78,14 @@
         <footer>
             @yield('footer')
         </footer>
-
+        <script>
+          let subMenu = document.getElementById("subMenu");
+        
+          function toggleMenu(){
+            subMenu.classList.toggle("open-menu");
+        
+          }
+          </script> 
 </body>
 
 </html>

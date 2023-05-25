@@ -74,7 +74,7 @@
     <script>
         validator({
             form: '.form-2',
-            rules: [
+            rules: [    
                 isRequired('.name'),
                 isEmail('.email'),
                 isPassword('.password'),

@@ -23,6 +23,7 @@ class UploadController extends Controller
         //     'prod_name' => ['required'],
         //     'buy_date' => ['required']
         // ]);
+        $userId = auth()->id();
         $size='';
         if (is_null($request->input('size_clothes')))  $size = $request->input('size_shoes') ;
         else $size = $request->input('size_clothes') ;
@@ -35,13 +36,15 @@ class UploadController extends Controller
             // Save the file locally in the storage/public/ folder under a new folder named /product
             $request->file->store('prod_image', 'public');
 
+
             // Store the record, using the new file hashname which will be it's new filename identity.
             $product = new Products([
                 "prod_name" => $request->input('prod_name'),
+                'user_id' => $userId ,
                 // "category_id" => $request ->input('')
                 "descr" => $request->input('descr'),
                 'buy_date' => $request->input('buy_date'),
-                'condition' => $request->input('condition'),
+                'condition' =>$request->input('condition'),
                 'material' => $request->input('material'),
                 'size' =>$size,
                 'category_id' =>$request->input('category'),
@@ -53,9 +56,10 @@ class UploadController extends Controller
         } else {
             $product = new Products([
                 "prod_name" => $request->input('prod_name'),
+                'user_id' => $userId ,
                 "descr" => $request->input('descr'),
                 'buy_date' => $request->input('buy_date'),
-                'condition' => $request->input('condition'),
+                'condition' =>$request->input('condition'),
                 'size' =>$size,
                 'category_id' =>$request->input('category'),
                 'material' => $request->input('material'),

@@ -75,6 +75,22 @@
                 <a href=""><i class="fa-solid fa-message message"></i></a>
             </div>
     </section>
+    @auth
+        <script>
+            var fullName = '{{ session("fullName") }}';
+            if (fullName) {
+                var h2Element = document.querySelector('.user-infor h2');
+                h2Element.textContent = fullName;
+            }
+        </script>
+    @endauth
+
+    @guest
+    <script>
+        var h2Element = document.querySelector('.user-infor h2');
+        h2Element.textContent = "Guest";
+    </script>
+@endguest
 @endsection
 
 @section('footer')

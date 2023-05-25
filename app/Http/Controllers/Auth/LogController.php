@@ -41,7 +41,9 @@ class LogController extends Controller
 
         if (Auth::attempt(['phone' => $phone, 'password' => $password])) {
             $request->session()->regenerate();
-            return redirect()->route('index')->with('success', 'LOGIN SUCCESSFULLY!');
+            // $user = Auth::user();
+            // $fullName = $user->fullname; 
+            return view('index')->with('success', 'LOGIN SUCCESSFULLY!');
         }
         return redirect()->route('login_register');
     }

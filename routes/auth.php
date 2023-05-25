@@ -65,6 +65,9 @@ Route::middleware('auth')->group(function () {
     //     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
     //                 ->name('logout');
     //upload render
+    Route::get('/account', [\App\Http\Controllers\AccountController::class, 'create'])
+        ->name('account');
+
     Route::get('/upload', [\App\Http\Controllers\UploadController::class, 'create'])
         ->name('upload');
 
@@ -73,6 +76,34 @@ Route::middleware('auth')->group(function () {
         ->name('upload');
 
 
-    Route::post('/logout', [\App\Http\Controllers\Auth\LogController::class, 'logout'])
+    Route::get('/logout', [\App\Http\Controllers\Auth\LogController::class, 'logout'])
         ->name('logout');
+
+    Route::get('/p_manage', [\App\Http\Controllers\ProductController::class, 'manage_products_return'])
+        ->name('p_manage');
+
+    Route::delete('/p_manage/delete/{id}', [\App\Http\Controllers\ProductController::class, 'delete_product'])
+        ->name('delete_product');
+
 });
+Route::get('/admin',[App\Http\Controllers\AdminController::class, 'create'])
+    ->name('admin');
+Route::post('/admin', [App\Http\Controllers\AdminController::class, 'login'])    
+    ->name('admin');
+Route::get('/admin/awaiting_approval', [App\Http\Controllers\AdminController::class, 'awaiting_approval_return'])
+    ->name('admin.a_approval');
+Route::get('/admin/approved', [App\Http\Controllers\AdminController::class, 'approved_return'])
+    ->name('admin.approved');
+
+Route::post('/admin/delete/{id}', [\App\Http\Controllers\AdminController::class, 'delete_product_aa'])
+        ->name('admin.delete.aa');
+
+Route::delete('/admin/delete/{id}', [\App\Http\Controllers\AdminController::class, 'delete_product'])
+        ->name('admin.delete.a');
+Route::post('/admin/approve/{id}', [\App\Http\Controllers\AdminController::class, 'approve_product'])
+        ->name('admin.approve');        
+
+
+
+
+
